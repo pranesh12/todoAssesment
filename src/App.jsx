@@ -5,16 +5,10 @@ import Todo from "./components/Todo/Todo";
 export const TodoContext = createContext(null);
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: "1sdf", taskName: "Eat rice", completed: false, priority: "low" },
-    { id: "2fff", taskName: "Go to Gym", completed: true, priority: "medium" },
-    {
-      id: "3fadf",
-      taskName: "Read 1 book",
-      completed: false,
-      priority: "high",
-    },
-  ]);
+  const initialTodo = localStorage.getItem("todos")
+    ? JSON.parse(localStorage.getItem("todos"))
+    : [];
+  const [todos, setTodos] = useState(initialTodo);
 
   return (
     <div className="container">

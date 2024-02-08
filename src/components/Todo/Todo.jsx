@@ -32,6 +32,7 @@ const Todo = () => {
       setTodos(updatedTodos);
       setEdit(false);
       setEditId(null);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
     } else {
       const newTodo = {
         id: uuidv4(),
@@ -58,6 +59,7 @@ const Todo = () => {
   const handleDelete = (id) => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const hadleEdit = (id) => {
@@ -78,6 +80,7 @@ const Todo = () => {
     );
 
     setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
   return (
@@ -147,7 +150,10 @@ const Todo = () => {
                       </span>
                     </td>
                     <td>
-                      <span onClick={() => hadleEdit(todo.id)}>
+                      <span
+                        className="text-muted"
+                        onClick={() => hadleEdit(todo.id)}
+                      >
                         <img
                           style={{ cursor: "pointer", textColor: "green" }}
                           src={editIcon}
