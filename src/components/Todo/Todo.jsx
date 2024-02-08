@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import { TodoContext } from "../../App";
 import { v4 as uuidv4 } from "uuid";
+import deleteIcon from "../../assets/delete-1487-svgrepo-com.svg";
+import editIcon from "../../assets/edit-2-svgrepo-com (1).svg";
+import completedIcon from "../../assets/done-v-svgrepo-com.svg";
 const Todo = () => {
   const { todos, setTodos } = useContext(TodoContext);
   const [edit, setEdit] = useState(false);
@@ -81,32 +84,40 @@ const Todo = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input
+          className="form-control form-control-lg mt-3 mb-3"
           value={taskValues.taskName}
           onChange={handleChange}
           name="taskName"
           type="text"
           placeholder="Add Todo"
         />
+
         <select
+          className="form-select mb-3"
           onChange={handleChange}
           name="priority"
           value={taskValues.priority}
         >
+          <option value="" disabled selected>
+            Choose priority
+          </option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <button type="submit"> {edit ? "Edit" : "Add "}</button>
+        <button className="btn btn-success mb-5" type="submit">
+          {edit ? "Edit" : "Add "}
+        </button>
       </form>
 
       <div>
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Todo name</th>
               <th scope="col">Status</th>
-              <th scope="col">Switch</th>
+              <th>Priority</th>
+              <th scope="col">Mark as Complete</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
@@ -116,21 +127,46 @@ const Todo = () => {
               todos.map((todo) => {
                 return (
                   <tr key={todo.id}>
-                    <th scope="row">1</th>
                     <td>{todo.taskName}</td>
+
+                    <td className=" rounded-pill">
+                      {todo.completed ? "completed" : "Not completed"}
+                    </td>
                     <td>{todo.priority}</td>
                     <td>
-                      <button onClick={() => handleCompleted(todo.id)}>
-                        completed
-                      </button>
+                      <span onClick={() => handleCompleted(todo.id)}>
+                        <img
+                          style={{ cursor: "pointer", textColor: "green" }}
+                          src={completedIcon}
+                          width={15}
+                          height={15}
+                          alt="Delete recepie"
+                        />
+                      </span>
                     </td>
                     <td>
-                      <button onClick={() => hadleEdit(todo.id)}>Edit</button>
+                      <span onClick={() => hadleEdit(todo.id)}>
+                        <img
+                          style={{ cursor: "pointer", textColor: "green" }}
+                          src={editIcon}
+                          width={15}
+                          height={15}
+                          alt="Delete recepie"
+                        />
+                      </span>
                     </td>
                     <td>
-                      <button onClick={() => handleDelete(todo.id)}>
-                        delete
-                      </button>
+                      <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => handleDelete(todo.id)}
+                      >
+                        <img
+                          src={deleteIcon}
+                          width={15}
+                          height={15}
+                          alt="Delete recepie"
+                        />
+                      </span>
                     </td>
                   </tr>
                 );

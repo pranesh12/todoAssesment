@@ -24,7 +24,7 @@ function App() {
           setTodos,
         }}
       >
-        <h1>Hello</h1>
+        <h1 className="text-center mt-5 mb-5">Todo App</h1>
         <Todo />
       </TodoContext.Provider>
     </div>
