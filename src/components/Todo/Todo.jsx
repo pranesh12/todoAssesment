@@ -50,7 +50,7 @@ const Todo = () => {
         id: "",
         taskName: "",
         completed: "",
-        priority: "",
+        priority: "low",
       });
     }
   };
@@ -102,20 +102,19 @@ const Todo = () => {
           className="form-select mb-3"
           onChange={handleChange}
           name="priority"
-          value={taskValues.priority}
         >
           <option value="" disabled selected>
-            Choose priority
+            Set Priority
           </option>
-          <option defaultValue value="low">
-            Low
-          </option>
+          <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <button className="btn btn-success mb-5" type="submit">
-          {edit ? "Edit" : "Add "}
-        </button>
+        <div className="d-grid mt-2 mb-2">
+          <button className="btn btn-success mb-5" type="submit">
+            {edit ? "Update" : "Add "}
+          </button>
+        </div>
       </form>
 
       {/* Adding counter componet */}
@@ -144,11 +143,11 @@ const Todo = () => {
               todos.map((todo) => {
                 return (
                   <tr key={todo.id}>
-                    <td>{todo.taskName}</td>
-                    <td className=" rounded-pill">
+                    <td className="text-capitalize">{todo.taskName}</td>
+                    <td className=" rounded-pill text-capitalize">
                       {todo.completed ? "Completed" : "Not completed"}
                     </td>
-                    <td>{todo.priority}</td>
+                    <td className="text-capitalize">{todo.priority}</td>
                     <td>
                       <span onClick={() => handleCompleted(todo.id)}>
                         <img
