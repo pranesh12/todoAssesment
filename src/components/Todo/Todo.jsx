@@ -32,12 +32,13 @@ const Todo = () => {
       const newTodo = {
         id: uuidv4(),
         taskName: taskValues.taskName,
-        completed: taskValues.completed,
+        completed: false,
         priority: taskValues.priority,
       };
       if (newTodo.taskName.trim() !== "") {
         setTodos([...todos, newTodo]);
       }
+      localStorage.setItem("todos", JSON.stringify(todos));
       setTaskValues({
         id: "",
         taskName: "",
@@ -56,9 +57,8 @@ const Todo = () => {
   };
 
   const hadleEdit = (id) => {
-    console.log(id);
     const editTodo = todos.filter((todo) => todo.id == id);
-    console.log(editTodo);
+
     setTaskValues({
       taskName: editTodo[0].taskName,
       completed: editTodo[0].completed,
@@ -67,9 +67,18 @@ const Todo = () => {
     setEdit(true);
     setEditId(id);
   };
+
+  const handleCompleted = (id) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: true } : todo
+    );
+
+    setTodos(updatedTodos);
+  };
+
+  console.log(todos);
   return (
     <div>
-      <h1>Todod</h1>
       <form onSubmit={handleSubmit}>
         <input
           value={taskValues.taskName}
@@ -87,7 +96,7 @@ const Todo = () => {
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
-        <button type="submit">Add Todo</button>
+        <button type="submit"> {edit ? "Edit" : "Add "}</button>
       </form>
 
       <div>
@@ -110,7 +119,11 @@ const Todo = () => {
                     <th scope="row">1</th>
                     <td>{todo.taskName}</td>
                     <td>{todo.priority}</td>
-                    <td>switbutton</td>
+                    <td>
+                      <button onClick={() => handleCompleted(todo.id)}>
+                        completed
+                      </button>
+                    </td>
                     <td>
                       <button onClick={() => hadleEdit(todo.id)}>Edit</button>
                     </td>
