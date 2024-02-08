@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import deleteIcon from "../../assets/delete-1487-svgrepo-com.svg";
 import editIcon from "../../assets/edit-2-svgrepo-com (1).svg";
 import completedIcon from "../../assets/done-v-svgrepo-com.svg";
+import Sort from "../Sort/Sort";
 
 const Todo = () => {
   const { todos, setTodos } = useContext(TodoContext);
@@ -116,6 +117,10 @@ const Todo = () => {
         </button>
       </form>
 
+      <div className="mx-atuo">
+        <Sort />
+      </div>
+
       <div>
         <table className="table">
           <thead>
@@ -124,7 +129,7 @@ const Todo = () => {
               <th scope="col">Status</th>
               <th>Priority</th>
               <th scope="col">Mark</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Update</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
