@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import deleteIcon from "../../assets/delete-1487-svgrepo-com.svg";
 import editIcon from "../../assets/edit-2-svgrepo-com (1).svg";
 import completedIcon from "../../assets/done-v-svgrepo-com.svg";
+
 const Todo = () => {
   const { todos, setTodos } = useContext(TodoContext);
   const [edit, setEdit] = useState(false);
@@ -12,7 +13,7 @@ const Todo = () => {
     id: "",
     taskName: "",
     completed: false,
-    priority: "",
+    priority: "low",
   });
 
   const handleSubmit = (e) => {
@@ -79,7 +80,6 @@ const Todo = () => {
     setTodos(updatedTodos);
   };
 
-  console.log(todos);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -90,6 +90,7 @@ const Todo = () => {
           name="taskName"
           type="text"
           placeholder="Add Todo"
+          required
         />
 
         <select
@@ -101,7 +102,9 @@ const Todo = () => {
           <option value="" disabled selected>
             Choose priority
           </option>
-          <option value="low">Low</option>
+          <option defaultValue value="low">
+            Low
+          </option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
@@ -117,7 +120,7 @@ const Todo = () => {
               <th scope="col">Todo name</th>
               <th scope="col">Status</th>
               <th>Priority</th>
-              <th scope="col">Mark as Complete</th>
+              <th scope="col">Mark</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
@@ -128,9 +131,8 @@ const Todo = () => {
                 return (
                   <tr key={todo.id}>
                     <td>{todo.taskName}</td>
-
                     <td className=" rounded-pill">
-                      {todo.completed ? "completed" : "Not completed"}
+                      {todo.completed ? "Completed" : "Not completed"}
                     </td>
                     <td>{todo.priority}</td>
                     <td>
