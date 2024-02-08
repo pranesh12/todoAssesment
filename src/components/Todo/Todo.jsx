@@ -5,6 +5,7 @@ import deleteIcon from "../../assets/delete-1487-svgrepo-com.svg";
 import editIcon from "../../assets/edit-2-svgrepo-com (1).svg";
 import completedIcon from "../../assets/done-v-svgrepo-com.svg";
 import Sort from "../Sort/Sort";
+import Counter from "../Counter/Counter";
 
 const Todo = () => {
   const { todos, setTodos } = useContext(TodoContext);
@@ -117,7 +118,11 @@ const Todo = () => {
         </button>
       </form>
 
-      <div className="mx-atuo">
+      <div>
+        <Counter />
+      </div>
+
+      <div className="d-flex justify-content-center  mb-5">
         <Sort />
       </div>
 
