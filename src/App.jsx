@@ -6,9 +6,14 @@ export const TodoContext = createContext(null);
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: "1", taskName: "Eat rice", completed: false, priority: "low" },
-    { id: "2", taskName: "Go to Gym", completed: true, priority: "medium" },
-    { id: "3", taskName: "Read 1 book", completed: false, priority: "high" },
+    { id: "1sdf", taskName: "Eat rice", completed: false, priority: "low" },
+    { id: "2fff", taskName: "Go to Gym", completed: true, priority: "medium" },
+    {
+      id: "3fadf",
+      taskName: "Read 1 book",
+      completed: false,
+      priority: "high",
+    },
   ]);
 
   return (

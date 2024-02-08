@@ -3,8 +3,10 @@ import { TodoContext } from "../../App";
 import { v4 as uuidv4 } from "uuid";
 const Todo = () => {
   const { todos, setTodos } = useContext(TodoContext);
+  const [edit, setEdit] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [taskValues, setTaskValues] = useState({
-    id: uuidv4(),
+    id: "",
     taskName: "",
     completed: false,
     priority: "",
@@ -12,21 +14,59 @@ const Todo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodo = {
-      id: taskValues.id,
-      taskName: taskValues.taskName,
-      completed: taskValues.completed,
-      priority: taskValues.priority,
-    };
-    if (newTodo.taskName.trim() !== "") {
-      setTodos([...todos, newTodo]);
+    if (edit) {
+      const updatedTodos = todos.map((todo) =>
+        todo.id === editId
+          ? {
+              ...todo,
+              taskName: taskValues.taskName,
+              priority: taskValues.priority,
+            }
+          : todo
+      );
+
+      setTodos(updatedTodos);
+      setEdit(false);
+      setEditId(null);
+    } else {
+      const newTodo = {
+        id: uuidv4(),
+        taskName: taskValues.taskName,
+        completed: taskValues.completed,
+        priority: taskValues.priority,
+      };
+      if (newTodo.taskName.trim() !== "") {
+        setTodos([...todos, newTodo]);
+      }
+      setTaskValues({
+        id: "",
+        taskName: "",
+        completed: "",
+        priority: "",
+      });
     }
   };
   const handleChange = (e) => {
     setTaskValues({ ...taskValues, [e.target.name]: e.target.value });
   };
 
-  console.log(taskValues);
+  const handleDelete = (id) => {
+    const newTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(newTodos);
+  };
+
+  const hadleEdit = (id) => {
+    console.log(id);
+    const editTodo = todos.filter((todo) => todo.id == id);
+    console.log(editTodo);
+    setTaskValues({
+      taskName: editTodo[0].taskName,
+      completed: editTodo[0].completed,
+      priority: editTodo[0].priority,
+    });
+    setEdit(true);
+    setEditId(id);
+  };
   return (
     <div>
       <h1>Todod</h1>
@@ -71,8 +111,14 @@ const Todo = () => {
                     <td>{todo.taskName}</td>
                     <td>{todo.priority}</td>
                     <td>switbutton</td>
-                    <td>editbutton</td>
-                    <td>deleteButton</td>
+                    <td>
+                      <button onClick={() => hadleEdit(todo.id)}>Edit</button>
+                    </td>
+                    <td>
+                      <button onClick={() => handleDelete(todo.id)}>
+                        delete
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
