@@ -118,10 +118,11 @@ const Todo = () => {
         </button>
       </form>
 
+      {/* Adding counter componet */}
       <div>
         <Counter />
       </div>
-
+      {/* Adding sorting component */}
       <div className="d-flex justify-content-center  mb-5">
         <Sort />
       </div>
@@ -155,7 +156,6 @@ const Todo = () => {
                           src={completedIcon}
                           width={15}
                           height={15}
-                          alt="Delete recepie"
                         />
                       </span>
                     </td>
@@ -169,7 +169,6 @@ const Todo = () => {
                           src={editIcon}
                           width={15}
                           height={15}
-                          alt="Delete recepie"
                         />
                       </span>
                     </td>
