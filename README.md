@@ -1,9 +1,22 @@
-# React + Vite
+1. Todo Component(Todo.jsx) :
+Handles form submission for adding and editing.
+Implements functions for handling deleting, and editing todos.
+They are showing to-do lists with completed tasks / uncompleted tasks.
+It has included counter and sorting components.
+Utilize localStorage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Sort Component (Sort.js):
+It contains a button to sort recipes by priority.
+It is sortByPriority functionality that sorts by high > medium > low.
 
-Currently, two official plugins are available:
+3. Counter Component
+Displays the count of completed and uncompleted tasks counter.
+Utilizes the useContext hook to access the global state.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# todoAssesment
+  Context Usage:
+  The code includes the usage of useContext to manage the global state (assuming it's a context called TodoContext) for tasks.
+  External Dependencies:
+  Utilizes external dependencies like uuid for generating unique IDs for unique to-do task.
+  Styling:
+  
+  Applies some basic styling using Bootstrap CSS classes.
